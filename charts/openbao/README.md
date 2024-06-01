@@ -1,6 +1,6 @@
 # openbao
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![AppVersion: v2.0.0-alpha20240329](https://img.shields.io/badge/AppVersion-v2.0.0--alpha20240329-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![AppVersion: v2.0.0-alpha20240329](https://img.shields.io/badge/AppVersion-v2.0.0--alpha20240329-informational?style=flat-square)
 
 Official OpenBao Chart
 
@@ -15,6 +15,7 @@ Official OpenBao Chart
 ## Source Code
 
 * <https://github.com/openbao/openbao-helm>
+* <https://github.com/openbao/openbao>
 
 ## Requirements
 
@@ -71,7 +72,7 @@ Kubernetes: `>= 1.27.0-0`
 | csi.volumeMounts | list | `[]` | volumeMounts is a list of volumeMounts for the main server container. These are rendered via toYaml rather than pre-processed like the extraVolumes value. The purpose is to make it easy to share volumes between containers. |
 | csi.volumes | list | `[]` | volumes is a list of volumes made available to all containers. These are rendered via toYaml rather than pre-processed like the extraVolumes value. The purpose is to make it easy to share volumes between containers. |
 | global.enabled | bool | `true` | enabled is the master enabled switch. Setting this to true or false will enable or disable all the components within this chart by default. |
-| global.externalVaultAddr | string | `""` | External openbao server address for the injector and CSI provider to use. Setting this will disable deployment of a openbao server. |
+| global.externalOpenbaoAddr | string | `""` | External openbao server address for the injector and CSI provider to use. Setting this will disable deployment of a openbao server. |
 | global.imagePullSecrets | list | `[]` | Image pull secret to use for registry authentication. Alternatively, the value may be specified as an array of strings. |
 | global.namespace | string | `""` | The namespace to deploy to. Defaults to the `helm` installation namespace. |
 | global.openshift | bool | `false` | If deploying to OpenShift |
@@ -99,7 +100,7 @@ Kubernetes: `>= 1.27.0-0`
 | injector.certs.keyName | string | `"tls.key"` |  |
 | injector.certs.secretName | string | `nil` |  |
 | injector.enabled | string | `"-"` | True if you want to enable openbao agent injection. @default: global.enabled |
-| injector.externalVaultAddr | string | `""` | Deprecated: Please use global.externalVaultAddr instead. |
+| injector.externalOpenbaoAddr | string | `""` | Deprecated: Please use global.externalBaoAddr instead. |
 | injector.extraEnvironmentVars | object | `{}` |  |
 | injector.extraLabels | object | `{}` |  |
 | injector.failurePolicy | string | `"Ignore"` |  |

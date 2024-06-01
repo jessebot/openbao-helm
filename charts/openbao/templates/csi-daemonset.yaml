@@ -65,11 +65,11 @@ spec:
             {{- toYaml .Values.csi.extraArgs | nindent 12 }}
             {{- end }}
           env:
-            - name: VAULT_ADDR
+            - name: BAO_ADDR
             {{- if eq (.Values.csi.agent.enabled | toString) "true" }}
               value: "unix:///var/run/vault/agent.sock"
-            {{- else if .Values.global.externalVaultAddr }}
-              value: "{{ .Values.global.externalVaultAddr }}"
+            {{- else if .Values.global.externalOpenbaoAddr }}
+              value: "{{ .Values.global.externalOpenbaoAddr }}"
             {{- else }}
               value: {{ include "openbao.scheme" . }}://{{ template "openbao.fullname" . }}.{{ include "openbao.namespace" . }}.svc:{{ .Values.server.service.port }}
             {{- end }}
@@ -110,16 +110,16 @@ spec:
             - bao
           args:
             - agent
-            - -config=/etc/vault/config.hcl
+            - -config=/etc/openbao/config.hcl
             {{- if .Values.csi.agent.extraArgs }}
             {{- toYaml .Values.csi.agent.extraArgs | nindent 12 }}
             {{- end }}
           ports:
             - containerPort: 8200
           env:
-            - name: VAULT_LOG_LEVEL
+            - name: BAO_LOG_LEVEL
               value: "{{ .Values.csi.agent.logLevel }}"
-            - name: VAULT_LOG_FORMAT
+            - name: BAO_LOG_FORMAT
               value: "{{ .Values.csi.agent.logFormat }}"
           securityContext:
             runAsNonRoot: true
@@ -129,7 +129,7 @@ spec:
             runAsGroup: 1000
           volumeMounts:
             - name: agent-config
-              mountPath: /etc/vault/config.hcl
+              mountPath: /etc/openbao/config.hcl
               subPath: config.hcl
               readOnly: true
             - name: agent-unix-socket

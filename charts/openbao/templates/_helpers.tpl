@@ -145,7 +145,7 @@ template logic.
 */}}
 {{- define "openbao.mode" -}}
   {{- template "openbao.serverEnabled" . -}}
-  {{- if or (.Values.injector.externalVaultAddr) (.Values.global.externalVaultAddr) -}}
+  {{- if or (.Values.injector.externalOpenbaoAddr) (.Values.global.externalOpenbaoAddr) -}}
     {{- $_ := set . "mode" "external" -}}
   {{- else if not .serverEnabled -}}
     {{- $_ := set . "mode" "external" -}}
@@ -230,9 +230,9 @@ Set's additional environment variables based on the mode.
 */}}
 {{- define "openbao.envs" -}}
   {{ if eq .mode "dev" }}
-            - name: VAULT_DEV_ROOT_TOKEN_ID
+            - name: BAO_DEV_ROOT_TOKEN_ID
               value: {{ .Values.server.dev.devRootToken }}
-            - name: VAULT_DEV_LISTEN_ADDRESS
+            - name: BAO_DEV_LISTEN_ADDRESS
               value: "[::]:8200"
   {{ end }}
 {{- end -}}

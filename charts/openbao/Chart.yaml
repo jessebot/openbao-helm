@@ -3,7 +3,7 @@
 
 apiVersion: v2
 name: openbao
-version: 0.4.0
+version: 0.5.0
 appVersion: v2.0.0-alpha20240329
 kubeVersion: ">= 1.27.0-0"
 description: Official OpenBao Chart
@@ -12,6 +12,7 @@ icon: https://github.com/openbao/artwork/blob/main/color/openbao-color.svg
 keywords: ["vault", "openbao", "security", "encryption", "secrets", "management", "automation", "infrastructure"]
 sources:
   - https://github.com/openbao/openbao-helm
+  - https://github.com/openbao/openbao
 annotations:
   charts.openshift.io/name: Openbao
 

@@ -20,7 +20,7 @@ spec:
       image: {{ .Values.server.image.registry | default "docker.io" }}/{{ .Values.server.image.repository }}:{{ .Values.server.image.tag | default "latest" }}
       imagePullPolicy: {{ .Values.server.image.pullPolicy }}
       env:
-        - name: VAULT_ADDR
+        - name: BAO_ADDR
           value: {{ include "openbao.scheme" . }}://{{ template "openbao.fullname" . }}.{{ include "openbao.namespace" . }}.svc:{{ .Values.server.service.port }}
         {{- include "openbao.extraEnvironmentVars" .Values.server | nindent 8 }}
       command:
